@@ -4,15 +4,19 @@
   "description": "Back end for project 1",
   "main": "index.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "ts-node index.ts"
   },
   "author": "Daniel J. Belenski",
   "license": "ISC",
   "dependencies": {
     "@azure/cosmos": "^3.15.0",
+    "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/uuid": "^8.3.3",
+    "cors": "^2.8.5",
     "express": "^4.17.2",
+    "ts-node": "^10.4.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

@@ -2,6 +2,7 @@
     "compilerOptions": {
         "strict": true,
         "strictNullChecks": false,
-        "semicolon": [true, "always"]
+        "target": "ES6",
+        "esModuleInterop": true
     }
 }

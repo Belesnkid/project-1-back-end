@@ -7,10 +7,12 @@ import EmployeeServices, { EmployeeService } from "./services/employee-service";
 
 const app = Express();
 app.use(Express.json());
+const port: number = 3001;
 
 const employeeDao: EmployeeDAO = new LocalEmployeeDAO();
 const employeeServices: EmployeeService = new EmployeeServices(employeeDao);
 
+//gets a list of all employees
 app.get("/employees", async (req, res) => {
     try {
         const employees: Employee[] = await employeeServices.retrieveAllEmployees();
@@ -22,6 +24,7 @@ app.get("/employees", async (req, res) => {
     }
 });
 
+//gets an employee record by its ID
 app.get("/employees/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -34,9 +37,10 @@ app.get("/employees/:id", async (req, res) => {
     }
 });
 
+//creates an employee record
 app.post("/employees", async (req, res) => {
-    try{
-        const employeeData:Employee = req.body;
+    try {
+        const employeeData: Employee = req.body;
         const employee = await employeeServices.addEmployee(employeeData);
         console.log("Employee was created successfully");
         console.log(employee);
@@ -47,4 +51,4 @@ app.post("/employees", async (req, res) => {
     }
 })
 
-app.listen(3001, () => { console.log("The server has started") });
+app.listen(port, () => { console.log("The server has started on port " + String(port)) });

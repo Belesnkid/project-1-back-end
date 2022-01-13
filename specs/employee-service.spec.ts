@@ -23,6 +23,7 @@ describe("Employee Service Tests", ()=>{
     // it("Should throw an error if employee is not in database", async ()=>{
     //     try{
     //         await employeeService.retrieveEmployeeById("0");
+    //         fail();
     //     } catch(error){
     //         expect(error instanceof ResourceNotFound).toBe(true);
     //     }

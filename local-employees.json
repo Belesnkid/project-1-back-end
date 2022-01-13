@@ -1,1 +1,34 @@
-[{"id":"101","fName":"test","lName":"testerson","uName":"test","pass":"T35t","isManager":false},{"id":"120986b4-4902-42ef-8bcf-b88c67db1aa2","fName":"Daniel","lName":"Belenski","uName":"Dragocon","pass":"Pa$$w0rd","isManager":true},{"id":"3e35dc67-a630-48a3-afe3-49182fa7abc8","fName":"Robert","lName":"Irvine","uName":"RamsaySux","pass":"imeanit","isManager":false},{"id":"16f1620b-d242-422d-8bc3-c6951c68975d","fName":"Johnny","lName":"Test","uName":"JTest","pass":"T35t","isManager":false}]
+[
+    {
+        "id": "101",
+        "fName": "test",
+        "lName": "testerson",
+        "uName": "test",
+        "pass": "T35t",
+        "isManager": false
+    },
+    {
+        "id": "120986b4-4902-42ef-8bcf-b88c67db1aa2",
+        "fName": "Daniel",
+        "lName": "Belenski",
+        "uName": "Dragocon",
+        "pass": "Pa$$w0rd",
+        "isManager": true
+    },
+    {
+        "id": "3e35dc67-a630-48a3-afe3-49182fa7abc8",
+        "fName": "Robert",
+        "lName": "Irvine",
+        "uName": "RamsaySux",
+        "pass": "imeanit",
+        "isManager": false
+    },
+    {
+        "id": "d6d70c43-b3e7-4c4b-b786-b961c11981dc",
+        "fName": "Johnny",
+        "lName": "Test",
+        "uName": "JTest",
+        "pass": "T35t",
+        "isManager": false
+    }
+]

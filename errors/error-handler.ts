@@ -1,6 +1,7 @@
 import {Response, Request} from "express";
 import ResourceNotFound from "./resource-not-found";
 import AlreadyExists from "./already-exists";
+import LoginError from "./login";
 
 export default function errorHandler(error: Error | unknown, req: Request, res: Response){
     if(error instanceof ResourceNotFound){
@@ -11,6 +12,11 @@ export default function errorHandler(error: Error | unknown, req: Request, res: 
     else if(error instanceof AlreadyExists){
         console.log("Resource Already Exists");
         res.status(409);
+        res.send(error.message);
+    }
+    else if (error instanceof LoginError){
+        console.log("Invalid Login Information");
+        res.status(401);
         res.send(error.message);
     }
     else{

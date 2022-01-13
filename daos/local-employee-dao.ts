@@ -38,4 +38,16 @@ export default class LocalEmployeeDAO implements EmployeeDAO {
         console.log(employee);
         return employee;
     }
+
+    async getEmployeeByUsername(username: string): Promise<employee> {
+        const employeeData = await readFile('C:\\Users\\Daniel\\OneDrive\\Desktop\\Project-1\\project-1-back-end\\local-employees.json');
+        const employees: Employee[] = JSON.parse(employeeData.toString());
+        const employee = employees.find(e => e.uName === username);
+        if(!employee){
+            throw new ResourceNotFound(`Employee with Username ${username} could not be found.`);
+        }
+        else{
+            return employee;
+        }
+    }
 }

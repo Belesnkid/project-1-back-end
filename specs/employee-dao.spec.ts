@@ -4,9 +4,9 @@ import Employee from "../entities/employee";
 import ResourceNotFound from "../errors/resource-not-found";
 import { readFile, writeFile } from "fs/promises";
 
-describe("Tests for Employee Dao", ()=>{
+describe("Tests for Employee Dao", () => {
 
-    const employeeDao:EmployeeDAO = new LocalEmployeeDAO();
+    const employeeDao: EmployeeDAO = new LocalEmployeeDAO();
 
     // const EmployeeDaoStub:EmployeeDAO = {
     //     async getAllEmployees(): Promise<Employee[]> {
@@ -27,7 +27,7 @@ describe("Tests for Employee Dao", ()=>{
     //     }
     // };
 
-    let testEmployee:Employee;
+    let testEmployee: Employee;
 
     // it("Should crate an employee in the database", async ()=>{
     //     const employee:Employee = {id:"", fName:"Daniel", lName:"Belenski", uName:"Dragocon", pass:"Pa$$w0rd", isManager:true};
@@ -50,7 +50,6 @@ describe("Tests for Employee Dao", ()=>{
     //         await EmployeeDaoStub.getAllEmployees();
     //         fail()
     //     }catch(error){
-    //         console.log(error);
     //         expect(error instanceof ResourceNotFound).toBe(true);
     //     }
     // })
@@ -62,4 +61,6 @@ describe("Tests for Employee Dao", ()=>{
     //         expect(error instanceof ResourceNotFound).toBe(true);
     //     }
     // })
+
+    // 
 })

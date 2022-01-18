@@ -40,4 +40,9 @@ export default class EmployeeServices implements EmployeeService {
         return newEmployee;
     }
 
+    async retrieveEmployeeByUsername(username:string):Promise<Employee>{
+        const employee:Employee = await this.employeeDao.getEmployeeByUsername(username);
+        return employee;
+    }
+
 }

@@ -3,6 +3,7 @@
         "strict": true,
         "strictNullChecks": false,
         "target": "ES6",
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "moduleResolution": "node"
     }
 }

@@ -4,13 +4,15 @@ import EmployeeDAO from "./employee-dao";
 import { readFile, writeFile } from "fs/promises";
 import Employee from "../entities/employee";
 import ResourceNotFound from "../errors/resource-not-found";
+import { logger, timestamp } from '..';
 
 export default class LocalEmployeeDAO implements EmployeeDAO {
     async getAllEmployees(): Promise<Employee[]> {
         const employeeData = await readFile('local-employees.json');
         const employees: Employee[] = JSON.parse(employeeData.toString());
+        logger.info(`${timestamp()} :EmployeeDAO: Got all Employees`);
         if(employees.length === 0){
-            throw new ResourceNotFound("The Database must be Empty")
+            throw new ResourceNotFound("The Database must be Empty", "")
         }
         else{
             return employees;
@@ -22,9 +24,10 @@ export default class LocalEmployeeDAO implements EmployeeDAO {
         const employees: Employee[] = JSON.parse(employeeData.toString());
         const employee = employees.find(e => e.id === id);
         if(!employee){
-            throw new ResourceNotFound(`Employee with ID ${id} could not be found.`);
+            throw new ResourceNotFound(`Employee with ID ${id} could not be found.`, id);
         }
         else{
+            logger.info(`${timestamp()} :EmployeeDAO: Found Employee with ID ${id}`);
             return employee;
         }
     }
@@ -35,7 +38,7 @@ export default class LocalEmployeeDAO implements EmployeeDAO {
         employee.id = v4();
         employees.push(employee);
         await writeFile('local-employees.json', JSON.stringify(employees));
-        console.log(employee);
+        logger.info(`${timestamp()} :EmployeeDAO: Employee Created ${employee}`)
         return employee;
     }
 
@@ -44,9 +47,10 @@ export default class LocalEmployeeDAO implements EmployeeDAO {
         const employees: Employee[] = JSON.parse(employeeData.toString());
         const employee = employees.find(e => e.uName === username);
         if(!employee){
-            throw new ResourceNotFound(`Employee with Username ${username} could not be found.`);
+            throw new ResourceNotFound(`Employee with Username ${username} could not be found.`, username);
         }
         else{
+            logger.info(`${timestamp()} :EmployeeDAO: Found Employee with Username ${username}`);
             return employee;
         }
     }

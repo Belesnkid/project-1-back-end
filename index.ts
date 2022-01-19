@@ -53,20 +53,17 @@ export function timestamp():String{
 
 app.patch("/login", async (req,res)=>{
     try{
-        logger.http(`${timestamp()} : Login Request`)
-        logger.verbose(`${timestamp()} : Login Request`);
+        logger.http(`${timestamp()} :Index: Login Request`)
         const body:{ username:string, pass:string } = req.body;
         const employee:Employee = await loginService.login(body.username,body.pass);
         console.log("Logged in successfully.");
-        logger.info(`${timestamp()} : ${employee.uName} successfully logged in`);
-        logger.verbose(`${timestamp()} : ${employee.uName} successfully logged in`);
+        logger.info(`${timestamp()} :Index: ${employee.uName} successfully logged in`);
         res.status(201);
         res.send(employee);
     } catch (error) {
         if (error instanceof ResourceNotFound){
             console.log("Invalid Login Information");
             logger.error(`${timestamp()} : Invalid Login Attempt; Username:${req.body.username}`);
-            logger.verbose(`${timestamp()} : Invalid Login Attempt; Username:${req.body.username}`);
             res.status(401);
             res.send(error.message);
         }
@@ -79,10 +76,10 @@ app.patch("/login", async (req,res)=>{
 //gets a list of all employees
 app.get("/employees", async (req, res) => {
     try {
-        logger.http(`${timestamp()} : Request for all Employees`);
+        logger.http(`${timestamp()} :Index: Request for all Employees`);
         const employees: Employee[] = await employeeServices.retrieveAllEmployees();
         console.log("Retrieved all Employees from Database");
-        logger.info(`${timestamp()} : Got all Employees from the database`);
+        logger.info(`${timestamp()} :Index: Got all Employees from the database`);
         res.status(200);
         res.send(employees);
     } catch (error) {
@@ -93,9 +90,10 @@ app.get("/employees", async (req, res) => {
 //gets an employee record by its ID
 app.get("/employees/:id", async (req, res) => {
     try {
+        logger.http(`${timestamp()} :Index: Request for Employee with id ${req.params.id}`);
         const { id } = req.params;
         const employee: Employee = await employeeServices.retrieveEmployeeById(id);
-        console.log(`retrieved employee ${employee.fName} by their ID`);
+        logger.info(`${timestamp()} :Index: Retrieved Employee with ID ${employee.id}`);
         res.status(200);
         res.send(employee);
     } catch (error) {
@@ -106,10 +104,10 @@ app.get("/employees/:id", async (req, res) => {
 //creates an employee record
 app.post("/employees", async (req, res) => {
     try {
+        logger.http(`${timestamp()} :Index: Post to create an employee`);
         const employeeData: Employee = req.body;
-        const employee = await employeeServices.addEmployee(employeeData);
-        console.log("Employee was created successfully");
-        console.log(employee);
+        const employee:Employee = await employeeServices.addEmployee(employeeData);
+        logger.info(`${timestamp} :Index: Employee Created Successfully, ${employee}`);
         res.status(201);
         res.send(employee);
     } catch (error) {
@@ -117,4 +115,6 @@ app.post("/employees", async (req, res) => {
     }
 })
 
-app.listen(port, () => { console.log("The server has started on port " + String(port)) });
+app.listen(port, () => { 
+    logger.verbose("The server has started on port " + String(port));
+    console.log("The server has started on port " + String(port)) });

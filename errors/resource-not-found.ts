@@ -1,5 +1,7 @@
 export default class ResourceNotFound extends Error{
-    constructor(message:string){
+    resourceId:string;
+    constructor(message:string, resourceId:string){
         super(message);
+        this.resourceId = resourceId;
     }
 }

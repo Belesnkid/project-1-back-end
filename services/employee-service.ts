@@ -1,6 +1,7 @@
 import EmployeeDAO from "../daos/employee-dao";
 import Employee from "../entities/employee";
 import AlreadyExists from "../errors/already-exists";
+import { logger, timestamp } from '..';
 
 export interface EmployeeService {
     retrieveAllEmployees(): Promise<Employee[]>
@@ -32,11 +33,11 @@ export default class EmployeeServices implements EmployeeService {
         const employees: Employee[] = await this.employeeDao.getAllEmployees();
         for (let e of employees) {
             if (e.fName === employee.fName && e.lName === employee.lName) {
-                throw new AlreadyExists(`Employee already exists with that first name and last name.`);
+                throw new AlreadyExists(`Employee already exists with that first name and last name.`, String(employee));
             }
         }
         const newEmployee: Employee = await this.employeeDao.createEmployee(employee);
-        console.log(newEmployee);
+        logger.info(`${timestamp()} :EmployeeService: Employee Created, ${newEmployee}`);
         return newEmployee;
     }
 

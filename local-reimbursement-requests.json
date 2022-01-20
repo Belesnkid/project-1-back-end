@@ -1,1 +1,36 @@
-[]
+[
+    {
+        "id": "4a3365e6-b0e5-4bad-81f1-61532c4aae63",
+        "employeeId": "101",
+        "amount": 100,
+        "pending": true,
+        "empReason": "Donuts"
+    },
+    {
+        "id": "6d0ba89f-ef6c-4358-8980-f4391339bbb0",
+        "employeeId": "101",
+        "amount": 10,
+        "pending": false,
+        "empReason": "Office Supplies"
+    },
+    {
+        "id": "56f30ed6-daf7-47e3-8abf-a957cd526af9",
+        "employeeId": "202",
+        "amount": 100,
+        "pending": true
+    },
+    {
+        "id": "1f7b6699-4f03-412b-a918-aa50209e6e76",
+        "employeeId": "303",
+        "amount": 1000,
+        "pending": true,
+        "empReason": "GPU"
+    },
+    {
+        "id": "1f7b6696-4f03-412b-a918-aa50209e6e76",
+        "employeeId": "303",
+        "amount": 1,
+        "pending": false,
+        "empReason": "Donation"
+    }
+]

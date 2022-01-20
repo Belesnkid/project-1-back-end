@@ -17,7 +17,7 @@ export default class LoginServiceImpl implements Login{
     async login(username: string, password: string): Promise<Employee> {
         const employee:Employee = await this.employeeDao.getEmployeeByUsername(username);
         if (employee.pass !== password){
-            throw new LoginError("Username and Password do not match.");
+            throw new LoginError("Username and Password do not match.", "");
         }
         else{
             return employee;

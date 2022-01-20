@@ -15,11 +15,17 @@ export default class LocalReimbursementDao implements ReimbursementDAO{
         logger.info(`${timestamp()} :ReimbursementDAO: Reimbursement Created : ${request}`);
         return request;
     }
+
     async getAllRequests(): Promise<ReimbursementRequest[]> {
         const requestData = await readFile('local-reimbursement-requests.json');
         const requests:ReimbursementRequest[] = JSON.parse(requestData.toString());
+        if(requests.length === 0){
+            throw new ResourceNotFound("The database is empty","");
+            
+        }
         return requests;
     }
+
     async getRequestById(id: string): Promise<ReimbursementRequest> {
         const requestData = await readFile('local-reimbursement-requests.json');
         const requests:ReimbursementRequest[] = JSON.parse(requestData.toString());
@@ -30,6 +36,7 @@ export default class LocalReimbursementDao implements ReimbursementDAO{
             return target;
         }
     }
+
     async getRequestsByEmployeeId(id: string): Promise<ReimbursementRequest[]> {
         const requestData = await readFile('local-reimbursement-requests.json');
         const requests:ReimbursementRequest[] = JSON.parse(requestData.toString());
@@ -40,6 +47,7 @@ export default class LocalReimbursementDao implements ReimbursementDAO{
             return empRequests;
         }
     }
+    
     async updateRequest(request: ReimbursementRequest): Promise<ReimbursementRequest> {
         const requestData = await readFile('local-reimbursement-requests.json');
         const requests:ReimbursementRequest[] = JSON.parse(requestData.toString());

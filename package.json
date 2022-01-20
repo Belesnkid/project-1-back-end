@@ -4,7 +4,7 @@
   "description": "Back end for project 1",
   "main": "index.ts",
   "scripts": {
-    "test": "jest",
+    "test": "jest --forceExit",
     "start": "ts-node index.ts"
   },
   "author": "Daniel J. Belenski",

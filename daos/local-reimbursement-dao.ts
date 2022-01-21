@@ -57,7 +57,7 @@ export default class LocalReimbursementDao implements ReimbursementDAO{
         let found = false;
         for(let r of requests){
             if(r.id === request.id){
-                r = request;
+                requests[requests.indexOf(r)] = request;
                 found = true;
             }
         }

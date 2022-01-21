@@ -30,5 +30,13 @@
         "uName": "JTest",
         "pass": "T35t",
         "isManager": false
+    },
+    {
+        "id": "06086df2-582e-43c6-9686-a12f35f37379",
+        "fName": "Johnny",
+        "lName": "Bravo",
+        "uName": "JBavo",
+        "pass": "HeyB@by",
+        "isManager": false
     }
 ]

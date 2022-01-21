@@ -23,6 +23,7 @@ export default class LocalReimbursementDao implements ReimbursementDAO{
             throw new ResourceNotFound("The database is empty","");
             
         }
+        logger.info(`${timestamp()} :ReimbursementDAO: Got all Reimbursement Requests`);
         return requests;
     }
 
@@ -33,6 +34,7 @@ export default class LocalReimbursementDao implements ReimbursementDAO{
         if (!target){
             throw new ResourceNotFound(`Reimbusement Request with ID ${id} could not be found`, id);
         } else {
+            logger.info(`${timestamp()} :ReimbursementDAO: Got request with ID ${id}`);
             return target;
         }
     }
@@ -44,6 +46,7 @@ export default class LocalReimbursementDao implements ReimbursementDAO{
         if (empRequests.length === 0){
             throw new ResourceNotFound(`Resource with ID ${id} coud not be found`, id);
         } else {
+            logger.info(`${timestamp()} :ReimbursementDAO: Got all Reimbursements with Employee ID ${id}`);
             return empRequests;
         }
     }

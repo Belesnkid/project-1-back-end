@@ -10,11 +10,11 @@ export default class LocalEmployeeDAO implements EmployeeDAO {
     async getAllEmployees(): Promise<Employee[]> {
         const employeeData = await readFile('local-employees.json');
         const employees: Employee[] = JSON.parse(employeeData.toString());
-        logger.info(`${timestamp()} :EmployeeDAO: Got all Employees`);
         if(employees.length === 0){
             throw new ResourceNotFound("The Database must be Empty", "")
         }
         else{
+            logger.info(`${timestamp()} :EmployeeDAO: Got all Employees`);
             return employees;
         }
     }

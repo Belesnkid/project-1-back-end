@@ -41,7 +41,8 @@ describe("Test Suite for the Reimbursement DAO", () => {
         const newRequests:ReimbursementRequest[] = [
             {id:"", employeeId:"101", amount:10, pending:true, empReason:"Office Supplies"},
             {id:"", employeeId:"202", amount:100, pending:true},
-            {id:"", employeeId:"303", amount:1000, pending:true, empReason:"GPU"}];
+            {id:"", employeeId:"303", amount:1000, pending:true, empReason:"GPU"}
+        ];
         for (let r of newRequests){
             await reimbursementDao.createRequest(r);
         }
@@ -60,7 +61,7 @@ describe("Test Suite for the Reimbursement DAO", () => {
     })
 
     it("Should update information in a specific request", async ()=>{
-        const newAmt = 18
+        const newAmt = 18;
         testRequest.amount = newAmt;
         const updatedRequest:ReimbursementRequest = await reimbursementDao.updateRequest(testRequest);
         expect(updatedRequest.amount).toBe(newAmt);

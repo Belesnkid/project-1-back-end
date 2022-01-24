@@ -17,7 +17,7 @@ export default function errorHandler(error: Error | unknown, req: Request, res: 
     }
     else if (error instanceof LoginError){
         logger.error(`${timestamp()} :ErrorHandler: Invalid Login Provided, ${error.resourceId.toString()}`);
-        res.status(400);
+        res.status(401);
         res.send(error.message);
     }
     else{

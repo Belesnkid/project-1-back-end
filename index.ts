@@ -68,8 +68,8 @@ app.patch("/login", async (req, res) => {
     } catch (error) {
         if (error instanceof ResourceNotFound) {
             logger.error(`${timestamp()} :Index: Invalid Login Attempt, Username: ${req.body.username.toString()}`);
-            res.status(401);
-            res.send(error);
+            res.status(400);
+            res.send(error.message);
         }
         else {
             errorHandler(error, req, res)

@@ -5,4 +5,5 @@ export default interface ReimbursementRequest{
     empReason?:string
     manReason?:string
     pending:boolean
+    approved?:boolean
 }

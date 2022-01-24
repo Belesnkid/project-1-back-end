@@ -11,6 +11,7 @@
         "employeeId": "101",
         "amount": 10,
         "pending": false,
+        "approved": true,
         "empReason": "Office Supplies"
     },
     {
@@ -31,7 +32,10 @@
         "employeeId": "303",
         "amount": 1,
         "pending": false,
-        "empReason": "Donation"
+        "approved": false,
+        "empReason": "Donation",
+        "manReason": "Invalid for Reimbursement"
+
     },
     {
         "id": "18338e46-780b-4b61-b384-5d64bc3a79f2",
@@ -46,5 +50,12 @@
         "amount": 25,
         "pending": true,
         "empReason": "Certification"
+    },
+    {
+        "id": "b92055f1-acce-4312-8e2b-e8e8df2c9930",
+        "employeeId": "d6d70c43-b3e7-4c4b-b786-b961c11981dc",
+        "amount": 30,
+        "pending": true,
+        "empReason": "Travel"
     }
 ]

@@ -8,6 +8,22 @@
         "isManager": false
     },
     {
+        "id": "202",
+        "fName": "Joe",
+        "lName": "Pesci",
+        "uName": "Never",
+        "pass": "RatOutYourFriends",
+        "isManager": false
+    },
+    {
+        "id": "303",
+        "fName": "Samuel",
+        "lName": "Jackson",
+        "uName": "Mace",
+        "pass": "Windu",
+        "isManager": false
+    },
+    {
         "id": "120986b4-4902-42ef-8bcf-b88c67db1aa2",
         "fName": "Daniel",
         "lName": "Belenski",

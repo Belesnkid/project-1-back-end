@@ -12,13 +12,14 @@ import ReimbursementServices, { ReimbursementService } from "./services/reimburs
 import ReimbursementRequest from "./entities/reimbursement-request";
 import ReimbursementDAO from "./daos/reimbursement-dao";
 import LocalReimbursementDao from "./daos/local-reimbursement-dao";
+import AzureEmployeeDAO from "./daos/azure-employee-dao";
 
 const app = Express();
 app.use(Express.json());
 app.use(cors());
 const port: number = 3001;
 
-const employeeDao: EmployeeDAO = new LocalEmployeeDAO();
+const employeeDao: EmployeeDAO = new AzureEmployeeDAO();
 const reimbursementDao: ReimbursementDAO = new LocalReimbursementDao();
 const employeeServices: EmployeeService = new EmployeeServices(employeeDao);
 const loginService: Login = new LoginServiceImpl(employeeDao);

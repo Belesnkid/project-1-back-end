@@ -1,34 +1,11 @@
 import EmployeeDAO from "../daos/employee-dao";
-import LocalEmployeeDAO from "../daos/local-employee-dao"
 import Employee from "../entities/employee";
 import ResourceNotFound from "../errors/resource-not-found";
-import { readFile } from "fs/promises";
+import AzureEmployeeDAO from "../daos/azure-employee-dao";
 
 describe("Tests for Employee Dao", () => {
 
-    const employeeDao: EmployeeDAO = new LocalEmployeeDAO();
-
-    const EmployeeDaoStub:EmployeeDAO = {
-        async getAllEmployees(): Promise<Employee[]> {
-            const employeeData = await readFile('empty-database.json');
-            const employees: Employee[] = JSON.parse(employeeData.toString());
-            if (employees.length === 0) {
-                throw new ResourceNotFound("The Database must be Empty", '');
-            }
-            else {
-                return employees;
-            }
-        },
-        getEmployeeById: function (id: string): Promise<Employee> {
-            throw new Error("Function not implemented.");
-        },
-        createEmployee: function (employee: Employee): Promise<Employee> {
-            throw new Error("Function not implemented.");
-        },
-        getEmployeeByUsername: function (username: string): Promise<Employee> {
-            throw new Error("Function not implemented.");
-        }
-    };
+    const employeeDao: EmployeeDAO = new AzureEmployeeDAO();
 
     let testEmployee: Employee;
 
@@ -46,15 +23,6 @@ describe("Tests for Employee Dao", () => {
     it("Should get all emplyees from the database", async ()=>{
         const employees:Employee[] = await employeeDao.getAllEmployees();
         expect(employees.length).toBeGreaterThan(0);
-    })
-
-    it("Should throw an error when the database is empty", async ()=>{
-        try{
-            await EmployeeDaoStub.getAllEmployees();
-            fail();
-        }catch(error){
-            expect(error instanceof ResourceNotFound).toBe(true);
-        }
     })
 
     it("Should throw an error when asked for an employee that is not in the database", async ()=>{

@@ -29,12 +29,6 @@ export default class EmployeeServices implements EmployeeService {
 
     //checks if the employee to be created exists or not before giving employee record to the dao for creation
     async addEmployee(employee: Employee): Promise<Employee> {
-        const employees: Employee[] = await this.employeeDao.getAllEmployees();
-        for (let e of employees) {
-            if (e.fName === employee.fName && e.lName === employee.lName) {
-                throw new AlreadyExists(`Employee already exists with that first name and last name.`, String(employee));
-            }
-        }
         const newEmployee: Employee = await this.employeeDao.createEmployee(employee);
         return newEmployee;
     }

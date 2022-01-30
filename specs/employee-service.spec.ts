@@ -1,7 +1,6 @@
 import AzureEmployeeDAO from "../daos/azure-employee-dao";
 import EmployeeDAO from "../daos/employee-dao";
 import Employee from "../entities/employee";
-import AlreadyExists from "../errors/already-exists";
 import ResourceNotFound from "../errors/resource-not-found";
 import EmployeeServices from "../services/employee-service"
 

@@ -1,4 +1,4 @@
-import LocalReimbursementDao from "../daos/local-reimbursement-dao"
+import AzureReimbursementDao from "../daos/azure-reimbursement-dao";
 import ReimbursementDAO from "../daos/reimbursement-dao"
 import ReimbursementRequest from "../entities/reimbursement-request";
 import ResourceNotFound from "../errors/resource-not-found";
@@ -6,7 +6,7 @@ import ReimbursementServices, { ReimbursementService } from "../services/reimbur
 
 describe("Reimbursement Service Test Suite", () =>{
 
-    const reimbursementDao:ReimbursementDAO = new LocalReimbursementDao();
+    const reimbursementDao:ReimbursementDAO = new AzureReimbursementDao();
     const reimbursementServices:ReimbursementService = new ReimbursementServices(reimbursementDao);
     
     it("Should get all pending requests", async ()=>{

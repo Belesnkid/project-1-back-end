@@ -1,11 +1,11 @@
+import AzureEmployeeDAO from "../daos/azure-employee-dao";
 import EmployeeDAO from "../daos/employee-dao";
-import LocalEmployeeDAO from "../daos/local-employee-dao";
 import Employee from "../entities/employee";
 import LoginError from "../errors/login";
 import LoginServiceImpl, { Login } from "../services/login-service"
 
 describe("Login Service Tests", ()=>{
-    const employeeDAO:EmployeeDAO = new LocalEmployeeDAO();
+    const employeeDAO:EmployeeDAO = new AzureEmployeeDAO();
     const loginService:Login = new LoginServiceImpl(employeeDAO);
     const employeeLogin = {uName:"JTest", pass:"T35t"};
     const managerLogin = {uName:"Dragocon", pass:"Pa$$w0rd"};

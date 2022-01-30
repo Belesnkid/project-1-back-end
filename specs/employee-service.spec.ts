@@ -1,12 +1,12 @@
+import AzureEmployeeDAO from "../daos/azure-employee-dao";
 import EmployeeDAO from "../daos/employee-dao";
-import LocalEmployeeDAO from "../daos/local-employee-dao";
 import Employee from "../entities/employee";
 import AlreadyExists from "../errors/already-exists";
 import ResourceNotFound from "../errors/resource-not-found";
 import EmployeeServices from "../services/employee-service"
 
 describe("Employee Service Tests", ()=>{
-    const employeeDao:EmployeeDAO = new LocalEmployeeDAO();
+    const employeeDao:EmployeeDAO = new AzureEmployeeDAO();
     const employeeService:EmployeeServices = new EmployeeServices(employeeDao);
     let testEmployee:Employee;
 

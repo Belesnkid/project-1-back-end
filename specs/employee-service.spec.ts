@@ -34,12 +34,4 @@ describe("Employee Service Tests", ()=>{
         testEmployee = await employeeService.addEmployee(testEmployee);
         expect(testEmployee.id).toBeTruthy();
     })
-
-    it("Should throw an error if employee already exists", async ()=>{
-        try{
-            await employeeService.addEmployee(testEmployee);
-        } catch(error){
-            expect(error instanceof AlreadyExists).toBe(true);
-        }
-    })
 })

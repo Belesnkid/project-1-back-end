@@ -1,35 +1,11 @@
-import LocalReimbursementDao from "../daos/local-reimbursement-dao"
 import ReimbursementDAO from "../daos/reimbursement-dao"
 import ReimbursementRequest from "../entities/reimbursement-request";
 import ResourceNotFound from "../errors/resource-not-found";
-import { readFile } from 'fs/promises';
+import AzureReimbursementDao from "../daos/azure-reimbursement-dao";
 
 describe("Test Suite for the Reimbursement DAO", () => {
-    const reimbursementDao:ReimbursementDAO = new LocalReimbursementDao();
+    const reimbursementDao:ReimbursementDAO = new AzureReimbursementDao();
     let testRequest:ReimbursementRequest;
-
-    const daoStub:ReimbursementDAO = {
-        createRequest: function (request: ReimbursementRequest): Promise<ReimbursementRequest> {
-            throw new Error("Function not implemented.");
-        },
-        async getAllRequests(): Promise<ReimbursementRequest[]> {
-            const requestData = await readFile('empty-database.json');
-            const requests:ReimbursementRequest[] = JSON.parse(requestData.toString());
-            if(requests.length === 0){
-                throw new ResourceNotFound("The database is empty","");    
-            }
-            return requests;
-        },
-        getRequestById: function (id: string): Promise<ReimbursementRequest> {
-            throw new Error("Function not implemented.");
-        },
-        getRequestsByEmployeeId: function (id: string): Promise<ReimbursementRequest[]> {
-            throw new Error("Function not implemented.");
-        },
-        updateRequest: function (request: ReimbursementRequest): Promise<ReimbursementRequest> {
-            throw new Error("Function not implemented.");
-        }
-    };
     
     it("Should create a Reimbursement Request", async ()=>{
         const request:ReimbursementRequest = {id:"", employeeId:"101", amount:100, pending:true, empReason:"Donuts"};
@@ -67,15 +43,6 @@ describe("Test Suite for the Reimbursement DAO", () => {
         expect(updatedRequest.amount).toBe(newAmt);
     })
 
-    it("Should throw an error if the database is empty", async ()=>{
-        try{
-            await daoStub.getAllRequests();
-            fail();
-        } catch (error){
-            expect(error instanceof ResourceNotFound).toBe(true);
-        }
-    })
-
     it("Should throw an error if given an ID not in the database", async ()=>{
         try{
             await reimbursementDao.getRequestById("foo");
@@ -88,16 +55,6 @@ describe("Test Suite for the Reimbursement DAO", () => {
     it("Should throw an error if there is no matching Employee ID in the database", async ()=>{
         try{
             await reimbursementDao.getRequestsByEmployeeId("foo");
-            fail();
-        } catch (error){
-            expect(error instanceof ResourceNotFound).toBe(true);
-        }
-    })
-
-    it("Should throw an error if no matching request id was found", async ()=>{
-        testRequest.id = "foo";
-        try{
-            await reimbursementDao.updateRequest(testRequest);
             fail();
         } catch (error){
             expect(error instanceof ResourceNotFound).toBe(true);

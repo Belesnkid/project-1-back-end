@@ -1,6 +1,5 @@
 import Express from "express";
 import EmployeeDAO from "./daos/employee-dao";
-import LocalEmployeeDAO from "./daos/local-employee-dao";
 import Employee from "./entities/employee";
 import errorHandler from "./errors/error-handler";
 import EmployeeServices, { EmployeeService } from "./services/employee-service";
@@ -11,8 +10,8 @@ import winston from 'winston';
 import ReimbursementServices, { ReimbursementService } from "./services/reimbursement-service";
 import ReimbursementRequest from "./entities/reimbursement-request";
 import ReimbursementDAO from "./daos/reimbursement-dao";
-import LocalReimbursementDao from "./daos/local-reimbursement-dao";
 import AzureEmployeeDAO from "./daos/azure-employee-dao";
+import AzureReimbursementDao from "./daos/azure-reimbursement-dao";
 
 const app = Express();
 app.use(Express.json());
@@ -20,7 +19,7 @@ app.use(cors());
 const port: number = 3001;
 
 const employeeDao: EmployeeDAO = new AzureEmployeeDAO();
-const reimbursementDao: ReimbursementDAO = new LocalReimbursementDao();
+const reimbursementDao: ReimbursementDAO = new AzureReimbursementDao();
 const employeeServices: EmployeeService = new EmployeeServices(employeeDao);
 const loginService: Login = new LoginServiceImpl(employeeDao);
 const reimbursementServices: ReimbursementService = new ReimbursementServices(reimbursementDao);
@@ -226,7 +225,7 @@ app.patch('/reimbursements', async (req, res) => {
     }
 })
 
-app.listen(port, () => {
+app.listen(process.env.PORT ?? port, () => {
     logger.verbose("The server has started on port " + String(port));
     console.log("The server has started on port " + String(port))
 });

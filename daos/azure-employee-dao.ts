@@ -15,11 +15,7 @@ export default class AzureEmployeeDAO implements EmployeeDAO{
 
 
     async getAllEmployees(): Promise<employee[]> {
-        logger.info(`${timestamp()} :Employee Dao: connection`);
-        try{
             const response = await container.items.readAll<Employee>().fetchAll();
-            console.log("Answer")
-            logger.info(`${timestamp()} :EmployeeDao: answer ${response}`);
             const employees:Employee[] = response.resources.map(e => ({...e}));
             if(employees.length === 0){
                 throw new ResourceNotFound("The Database must be Empty", "")
@@ -28,11 +24,6 @@ export default class AzureEmployeeDAO implements EmployeeDAO{
                 logger.info(`${timestamp()} :EmployeeDAO: Got all Employees`);
                 return employees;
             }
-        }
-        catch(error){
-            console.log(error);
-        }
-        console.log("skipped")
     }
 
     async getEmployeeById(id: string): Promise<employee> {
@@ -61,9 +52,8 @@ export default class AzureEmployeeDAO implements EmployeeDAO{
 
     async createEmployee(employee: employee): Promise<Employee> {
         employee.id = v4();
-        logger.info(`${timestamp()} :Employee Dao: connection`);
         const response = await container.items.create(employee);
-        logger.info(`${timestamp()} :EmployeeDao: answer`);
+        logger.info(`${timestamp()} :EmployeeDao: Employee was Created Successfully ${response.resource.id}`);
         return response.resource;
     }
     

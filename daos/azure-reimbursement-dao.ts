@@ -1,6 +1,5 @@
 import { CosmosClient } from "@azure/cosmos";
 import { v4 } from "uuid";
-// import { logger, timestamp } from "..";
 import reimbursementRequest from "../entities/reimbursement-request";
 import ResourceNotFound from "../errors/resource-not-found";
 import ReimbursementDAO from "./reimbursement-dao";
@@ -13,7 +12,6 @@ export default class AzureReimbursementDao implements ReimbursementDAO{
     async createRequest(request: reimbursementRequest): Promise<reimbursementRequest> {
         request.id = v4();
         const response = await container.items.create(request);
-        // logger.info(`${timestamp()} :ReimbursementDAO: new request created successfully, ${response.resource.id}`);
         return response.resource;
     }
     async getAllRequests(): Promise<reimbursementRequest[]> {
@@ -23,7 +21,6 @@ export default class AzureReimbursementDao implements ReimbursementDAO{
             throw new ResourceNotFound("Database is Empty","");
         }
         else{
-            // logger.info(`${timestamp} :ReimbursementDAO: got all requests: ${requests.length}`);
             return requests;
         }
     }
@@ -33,7 +30,6 @@ export default class AzureReimbursementDao implements ReimbursementDAO{
             throw new ResourceNotFound(`Request with ID ${id} could not be found`, id);
         }
         else{
-            // logger.info(`${timestamp} :ReimbursementDAO: got request with ID ${id}`);
             return response.resource;
         }
     }
@@ -49,7 +45,6 @@ export default class AzureReimbursementDao implements ReimbursementDAO{
             throw new ResourceNotFound(`No Requests found for employee with ID ${id}`,id);
         }
         else{
-            // logger.info(`${timestamp} :ReimbursementDAO: got request with Employee ID ${id}`);
             return targets;
         }
     }
@@ -59,7 +54,6 @@ export default class AzureReimbursementDao implements ReimbursementDAO{
             throw new ResourceNotFound(`Request was not able to be updated`, request.id);
         }
         else{
-            // logger.info(`${timestamp} :ReimbursementDAO: updated Request with ID ${response.resource.id}`);
             return response.resource;
         }
     }

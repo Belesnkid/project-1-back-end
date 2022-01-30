@@ -1,4 +1,3 @@
-import { logger, timestamp } from "..";
 import ReimbursementDAO from "../daos/reimbursement-dao";
 import ReimbursementRequest from "../entities/reimbursement-request";
 
@@ -49,7 +48,6 @@ export default class ReimbursementServices implements ReimbursementService{
                     requests.push(r);
                 }
             }
-            logger.info(`${timestamp()} :ReimbursementService: Got all open Requests`);
             return requests;
         } else {
             const empRequests:ReimbursementRequest[] = await this.retrieveEmployeeRequests(id);
@@ -59,7 +57,6 @@ export default class ReimbursementServices implements ReimbursementService{
                     requests.push(r);
                 }
             }
-            logger.info(`${timestamp()} :ReimbursementService: Got all open requests for employee with ID ${id}`);
             return requests;
         }
     }
@@ -73,7 +70,6 @@ export default class ReimbursementServices implements ReimbursementService{
                     requests.push(r);
                 }
             }
-            logger.info(`${timestamp()} :ReimbursementService: Got all closed Requests`);
             return requests;
         } else {
             const empRequests:ReimbursementRequest[] = await this.retrieveEmployeeRequests(id);
@@ -83,7 +79,6 @@ export default class ReimbursementServices implements ReimbursementService{
                     requests.push(r);
                 }
             }
-            logger.info(`${timestamp()} :ReimbursementService: Got all closed Requests for Employee with ID ${id}`);
             return requests;
         }
     }

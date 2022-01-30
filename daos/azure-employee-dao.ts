@@ -1,6 +1,5 @@
 import { CosmosClient } from "@azure/cosmos";
 import { v4 } from "uuid";
-import { logger, timestamp } from "..";
 import Employee from "../entities/employee";
 import employee from "../entities/employee";
 import ResourceNotFound from "../errors/resource-not-found";
@@ -21,7 +20,6 @@ export default class AzureEmployeeDAO implements EmployeeDAO{
                 throw new ResourceNotFound("The Database must be Empty", "")
             }
             else{
-                logger.info(`${timestamp()} :EmployeeDAO: Got all Employees`);
                 return employees;
             }
     }
@@ -32,7 +30,6 @@ export default class AzureEmployeeDAO implements EmployeeDAO{
             throw new ResourceNotFound(`Employee with ID ${id} could not be found.`, id);
         }
         else{
-            logger.info(`${timestamp()} :EmployeeDAO: Found Employee with ID ${id}`);
             return response.resource;
         }
     }
@@ -45,7 +42,6 @@ export default class AzureEmployeeDAO implements EmployeeDAO{
             throw new ResourceNotFound(`Employee with Username ${username} could not be found.`, username);
         }
         else{
-            logger.info(`${timestamp()} :EmployeeDAO: Found Employee with Username ${username}`);
             return employee;
         }
     }
@@ -53,7 +49,6 @@ export default class AzureEmployeeDAO implements EmployeeDAO{
     async createEmployee(employee: employee): Promise<Employee> {
         employee.id = v4();
         const response = await container.items.create(employee);
-        logger.info(`${timestamp()} :EmployeeDao: Employee was Created Successfully ${response.resource.id}`);
         return response.resource;
     }
     

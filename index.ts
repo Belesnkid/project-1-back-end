@@ -82,6 +82,7 @@ app.get("/employees", async (req, res) => {
     try {
         logger.http(`${timestamp()} :Index: Request for all Employees`);
         const employees: Employee[] = await employeeServices.retrieveAllEmployees();
+        logger.info(`${timestamp()} :EmployeeDAO: Got all Employees`);
         res.status(200);
         res.send(employees);
     } catch (error) {
@@ -95,6 +96,7 @@ app.get("/employees/:id", async (req, res) => {
         logger.http(`${timestamp()} :Index: Request for Employee with id ${req.params.id}`);
         const { id } = req.params;
         const employee: Employee = await employeeServices.retrieveEmployeeById(id);
+        logger.info(`${timestamp()} :EmployeeDAO: Found Employee with ID ${id}`);
         res.status(200);
         res.send(employee);
     } catch (error) {
@@ -108,6 +110,7 @@ app.post("/employees", async (req, res) => {
         logger.http(`${timestamp()} :Index: Post to create an employee`);
         const employeeData: Employee = req.body;
         const employee: Employee = await employeeServices.addEmployee(employeeData);
+        logger.info(`${timestamp()} :EmployeeDao: Employee was Created Successfully ${employee.id}`);
         res.status(201);
         res.send(employee);
     } catch (error) {
@@ -120,6 +123,7 @@ app.get('/reimbursements', async (req, res) => {
     try {
         logger.http(`${timestamp()} :Index: Get all Reimbursement Requests`);
         const requests: ReimbursementRequest[] = await reimbursementServices.retrieveAllRequests();
+        logger.info(`${timestamp} :ReimbursementDAO: got all requests: ${requests.length}`);
         res.status(200);
         res.send(requests);
     } catch (error) {
@@ -132,6 +136,7 @@ app.get('/reimbursements/employee/:id', async (req, res) => {
     try {
         logger.http(`${timestamp()} :Index: Get all Reimbursement Requests for Employee ${req.params.id}`);
         const requests: ReimbursementRequest[] = await reimbursementServices.retrieveEmployeeRequests(req.params.id);
+        logger.info(`${timestamp} :ReimbursementDAO: got request with Employee ID ${req.params.id}`);
         res.status(200);
         res.send(requests);
     } catch (error) {
@@ -168,6 +173,7 @@ app.get('/reimbursements/open/:id', async (req, res) => {
     try {
         logger.http(`${timestamp()} :Index: Get All Open Requests for Employee ${req.params.id}`);
         const requests: ReimbursementRequest[] = await reimbursementServices.getPendingRequests(req.params.id);
+        logger.info(`${timestamp} :ReimbursementDAO: got request with Employee ID ${req.params.id}`);
         res.status(200);
         res.send(requests);
     } catch (error) {
@@ -180,6 +186,7 @@ app.get('/reimbursements/closed/:id', async (req, res) => {
     try {
         logger.http(`${timestamp()} :Index: Get All Closed Requests for Employee ${req.params.id}`);
         const requests: ReimbursementRequest[] = await reimbursementServices.getClosedRequests(req.params.id);
+        logger.info(`${timestamp} :ReimbursementDAO: got request with Employee ID ${req.params.id}`);
         res.status(200);
         res.send(requests);
     } catch (error) {
@@ -192,6 +199,7 @@ app.get('/reimbursements/:id', async (req, res) => {
     try {
         logger.http(`${timestamp()} :Index: Get a Requests by ID ${req.params.id}`);
         const requests: ReimbursementRequest = await reimbursementServices.retrieveRequestById(req.params.id);
+        logger.info(`${timestamp} :ReimbursementDAO: got request with ID ${req.params.id}`);
         res.status(200);
         res.send(requests);
     } catch (error) {
@@ -205,6 +213,7 @@ app.post('/reimbursements', async (req, res) => {
         logger.http(`${timestamp()} :Index: Post to Create a new Reimbursement Request`);
         const newRequest: ReimbursementRequest = req.body;
         const createdRequest: ReimbursementRequest = await reimbursementServices.addNewRequest(newRequest);
+        logger.info(`${timestamp()} :ReimbursementDAO: new request created successfully, ${createdRequest.id}`);
         res.status(201);
         res.send(createdRequest);
     } catch (error) {
@@ -218,6 +227,7 @@ app.patch('/reimbursements', async (req, res) => {
         const updateRequest: ReimbursementRequest = req.body;
         logger.http(`${timestamp()} :Index: Patch to Update Request with ID ${updateRequest.id}`);
         const updatedRequest: ReimbursementRequest = await reimbursementServices.updateReimburement(updateRequest);
+        logger.info(`${timestamp} :ReimbursementDAO: updated Request with ID ${req.body.id}`);
         res.status(200);
         res.send(updatedRequest);
     } catch (error) {

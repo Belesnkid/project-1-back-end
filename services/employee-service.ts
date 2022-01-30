@@ -1,7 +1,6 @@
 import EmployeeDAO from "../daos/employee-dao";
 import Employee from "../entities/employee";
 import AlreadyExists from "../errors/already-exists";
-import { logger, timestamp } from '..';
 
 export interface EmployeeService {
     retrieveAllEmployees(): Promise<Employee[]>
@@ -37,7 +36,6 @@ export default class EmployeeServices implements EmployeeService {
             }
         }
         const newEmployee: Employee = await this.employeeDao.createEmployee(employee);
-        logger.info(`${timestamp()} :EmployeeService: Employee Created, ${newEmployee}`);
         return newEmployee;
     }
 
